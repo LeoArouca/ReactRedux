@@ -9,7 +9,13 @@ const VideoList = (props) => {
   // Map into array, React is smart to render array as many elements
   const videoItems = props.videos.map((video) => {
     // common strategy is to use id, it does not need to be too creative, as long as each has one different
-    return <VideoListItem key={video.etag} video={video} />
+    return(
+      <VideoListItem
+        onVideoSelect={props.onVideoSelect}
+        key={video.etag}
+        video={video}
+      />
+    );
   });
 
   return(

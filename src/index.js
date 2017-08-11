@@ -24,15 +24,22 @@ class App extends Component{
 
   constructor(props){
     super(props);
-    this.state = { videos: [] };
+    this.state = {
+      videos: [],
+      selectedVideo: null
+    };
 
     // Fetch youtube stuff
     // YTSearch({key: API_KEY, term: 'surfboards'}, function(data){
+    // npm install --s youtube-api-search
     YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
       // Standard way
       // this.setState({ videos: videos });
       // When have key and property/variable with the same name ES6 allows this:
-      this.setState({ videos });
+      this.setState({
+        videos: videos,
+        selectedVideo: videos[0]
+      });
     });
   }
 
@@ -43,11 +50,19 @@ class App extends Component{
 
     // Having the [0] it will try to do it before the data is there
 
+    // Send callback down to get the click of a video
+
+    // Function that send it in
+    // onVideoSelect={selectedVideo => this.setState({selectedVideo})
+
     return (
       <div>
         <SearchBar />
-        <VideoDetail video={ this.state.videos[0] } />
-        <VideoList videos={ this.state.videos } />
+        <VideoDetail video={ this.state.selectedVideo } />
+        <VideoList
+          onVideoSelect={selectedVideo => this.setState({selectedVideo})}
+          videos={ this.state.videos }
+        />
       </div>
     );
   }
