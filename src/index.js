@@ -4,6 +4,7 @@ import YTSearch from 'youtube-api-search';
 // ./ means current dir
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
+import VideoDetail from './components/video_detail';
 
 const API_KEY = 'AIzaSyB7ug5wuB17ns8l66Z8WcXsz7Prj6y5LBs';
 
@@ -40,9 +41,12 @@ class App extends Component{
     // Passing props
     // <VideoList videos={ this.state.videos } />
 
+    // Having the [0] it will try to do it before the data is there
+
     return (
       <div>
         <SearchBar />
+        <VideoDetail video={ this.state.videos[0] } />
         <VideoList videos={ this.state.videos } />
       </div>
     );
