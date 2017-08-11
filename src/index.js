@@ -29,10 +29,14 @@ class App extends Component{
       selectedVideo: null
     };
 
+    this.videoSearch('surfboards');
+  }
+
+  videoSearch(term){
     // Fetch youtube stuff
     // YTSearch({key: API_KEY, term: 'surfboards'}, function(data){
     // npm install --s youtube-api-search
-    YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+    YTSearch({key: API_KEY, term: term}, (videos) => {
       // Standard way
       // this.setState({ videos: videos });
       // When have key and property/variable with the same name ES6 allows this:
@@ -57,7 +61,7 @@ class App extends Component{
 
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
         <VideoDetail video={ this.state.selectedVideo } />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({selectedVideo})}

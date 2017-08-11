@@ -19,14 +19,20 @@ class SearchBar extends Component {
     this.state = { term : '' };
   }
 
+  // // Event handler
+  // onInputChange(event) {
+
+  //   // Update state
+  //   this.setState({ term: event.target.value });
+
+  //   console.log(event.target.value);
+  // }
   // Event handler
-  onInputChange(event) {
-
-    // Update state
-    this.setState({ term: event.target.value });
-
-    console.log(event.target.value);
+  onInputChange(term) {
+    this.setState({term});
+    this.props.onSearchTermChange(term);
   }
+
 
   // Class based component must have render
   render() {
@@ -36,10 +42,10 @@ class SearchBar extends Component {
     // Controlled form/input element
     // The state should drive the input
     return (
-      <div>
+      <div className='search-bar'>
         <input
           value={ this.state.term }
-          onChange={ event => this.setState({ term: event.target.value }) }
+          onChange={ event => this.onInputChange(event.target.value) }
         />
       </div>
     );
